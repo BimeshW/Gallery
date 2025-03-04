@@ -126,4 +126,22 @@ export const signIn = async (req: Request, res: Response) => {
   }
 };
 
-export const signOut = () => {};
+export const signOut = async (req: Request, res: Response) => {
+  try {
+    res.clearCookie("jwt")
+
+    res.status(200).json({
+      success: true,
+      message : "User logout successfully"
+    })
+    return;
+  } catch (error) {
+    console.log("Error trying to logout the user");
+    res.status(500).json({
+      success: false,
+      message: "Internal server error"
+    })
+    return;
+  }
+};
+
