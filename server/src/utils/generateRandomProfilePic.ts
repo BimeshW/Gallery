@@ -10,7 +10,7 @@ const images = [
   "https://i.pinimg.com/736x/3d/cc/2a/3dcc2ac999be0bdcc7aeb7c538af25c4.jpg",
 ];
 
-export const generateRandomImage = () => {
+export const generateProfilePic = () => {
   const randomIndex = Math.floor(Math.random() * images.length);
 
   return images[randomIndex];

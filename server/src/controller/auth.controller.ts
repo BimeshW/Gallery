@@ -1,19 +1,24 @@
 import { Request, Response } from "express";
 import User, { IUser } from "../models/user.model";
-import { generateRandomImage } from "../utils/generateImage";
+import { generateProfilePic } from "../utils/generateRandomProfilePic";
 import { checkPasscode, hashPassword } from "../utils/hashPassword";
 import { generateTokenAndSetCookie } from "../utils/generateTokenAndSetCookie";
 
 interface SignUpRequestBody {
   username: string;
   passcode: string;
-  image?: string;
+  profilePicture?: string;
+}
+
+interface SignInRequestBody {
+  username: string;
+  passcode: string;
 }
 
 export const signUp = async (req: Request, res: Response) => {
   try {
     const { username, passcode } = (await req.body) as SignUpRequestBody;
-    let { image } = await req.body;
+    let { profilePicture } = await req.body;
 
     if (!username || !passcode) {
       res.status(400).json({
@@ -40,8 +45,8 @@ export const signUp = async (req: Request, res: Response) => {
       return;
     }
 
-    if (!image) {
-      image = generateRandomImage();
+    if (!profilePicture) {
+      profilePicture = generateProfilePic();
     }
 
     const hashedPasscode = await hashPassword(passcode);
@@ -56,7 +61,7 @@ export const signUp = async (req: Request, res: Response) => {
     const newUser = new User({
       username,
       passcode: hashedPasscode,
-      image,
+      profilePicture,
     });
 
     newUser.save();
@@ -79,8 +84,8 @@ export const signUp = async (req: Request, res: Response) => {
 
 export const signIn = async (req: Request, res: Response) => {
   try {
-    const { username, passcode } = await req.body;
-  
+    const { username, passcode } = (await req.body) as SignInRequestBody;
+
     if (!username || !passcode) {
       res.status(400).json({
         success: false,
@@ -88,7 +93,7 @@ export const signIn = async (req: Request, res: Response) => {
       });
       return;
     }
-  
+
     const user: IUser | null = await User.findOne({ username });
     if (!user) {
       res.status(404).json({
@@ -97,7 +102,7 @@ export const signIn = async (req: Request, res: Response) => {
       });
       return;
     }
-  
+
     const user_passcode = user.passcode;
     const isPassCorrect = await checkPasscode({ passcode, user_passcode });
     if (!isPassCorrect) {
@@ -107,10 +112,10 @@ export const signIn = async (req: Request, res: Response) => {
       });
       return;
     }
-  
+
     const user_id = user._id as string;
     await generateTokenAndSetCookie({ user_id, res });
-  
+
     res.status(200).json({
       success: true,
       message: "User login successfully",
@@ -118,29 +123,29 @@ export const signIn = async (req: Request, res: Response) => {
     return;
   } catch (error) {
     console.log("Error in signin", error),
-    res.status(500).json({
-      success: false,
-      message: "Internal server error"
-    })
+      res.status(500).json({
+        success: false,
+        message: "Internal server error",
+      });
     return;
   }
 };
 
 export const signOut = async (req: Request, res: Response) => {
   try {
-    res.clearCookie("jwt")
+    res.clearCookie("jwt");
 
     res.status(200).json({
       success: true,
-      message : "User logout successfully"
-    })
+      message: "User logout successfully",
+    });
     return;
   } catch (error) {
     console.log("Error trying to logout the user");
     res.status(500).json({
       success: false,
-      message: "Internal server error"
-    })
+      message: "Internal server error",
+    });
     return;
   }
 };
