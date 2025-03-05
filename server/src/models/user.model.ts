@@ -27,6 +27,7 @@ const userSchema = new Schema<IUser>({
     type: Date,
     default: Date.now(),
   },
+  
 });
 
 const User = mongoose.model<IUser>("User", userSchema);
