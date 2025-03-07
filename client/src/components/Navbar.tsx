@@ -3,7 +3,6 @@ import { useAuthStore } from "../store/auth.store";
 import { useEffect } from "react";
 import { motion } from "motion/react";
 import { NavbarProps } from "../types/types";
-import { Link } from "react-router-dom";
 import { IoLogOut } from "react-icons/io5";
 import { FaBattleNet } from "react-icons/fa";
 

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Navbar from "../components/Navbar";
 import AuthDialog from "../components/AuthDialog";
+import Introduction from "../components/Introduction";
 
 const Homepage = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -9,18 +10,17 @@ const Homepage = () => {
   );
 
   return (
-    <div className="w-full min-h-screen">
+    <div className="w-full min-h-screen overflow-hidden">
       <Navbar
         setIsDialogOpen={setIsDialogOpen}
         setAuthDialogType={setAuthDialogType}
       />
-      <div className="w-full h-full relative flex justify-center items-center mt-12 p-2">
-        <AuthDialog
-          isDialogOpen={isDialogOpen}
-          type={authDialogType}
-          setIsDialogOpen={setIsDialogOpen}
-        />
-      </div>
+      <AuthDialog
+        isDialogOpen={isDialogOpen}
+        type={authDialogType}
+        setIsDialogOpen={setIsDialogOpen}
+      />
+      <Introduction setIsDialogOpen={setIsDialogOpen} />
     </div>
   );
 };
