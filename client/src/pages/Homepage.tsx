@@ -14,13 +14,13 @@ const Homepage = () => {
         setIsDialogOpen={setIsDialogOpen}
         setAuthDialogType={setAuthDialogType}
       />
-      {isDialogOpen && <div className="w-full h-full relative flex justify-center items-center mt-12">
+      <div className="w-full h-full relative flex justify-center items-center mt-12 p-2">
         <AuthDialog
           isDialogOpen={isDialogOpen}
           type={authDialogType}
           setIsDialogOpen={setIsDialogOpen}
         />
-      </div>}
+      </div>
     </div>
   );
 };

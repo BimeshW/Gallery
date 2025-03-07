@@ -1,7 +1,7 @@
 import { AnimatePresence } from "motion/react";
 import { AuthDialogTypes } from "../types/types";
 import { motion } from "motion/react";
-import { FcStackOfPhotos } from "react-icons/fc";
+import { FaBattleNet } from "react-icons/fa";
 import { FaUserAlt } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { FaEdit } from "react-icons/fa";
@@ -45,6 +45,12 @@ const AuthDialog = ({
       await fetchUser();
     } else {
       await signUp(formData);
+      setIsDialogOpen(false);
+      setFormData({
+        username: "",
+        passcode: "",
+        profilePicture: "",
+      });
     }
   };
 
@@ -52,37 +58,38 @@ const AuthDialog = ({
     <AnimatePresence initial={false}>
       {isDialogOpen ? (
         <motion.div
-          className={`w-[25rem] rounded-md shadow transition-all duration-75 ${
-            type === "sign-up" ? "h-[28rem]" : "h-[20rem]"
+          className={`w-[28rem] rounded-xl shadow-xl bg-gray-50/95 transition-all duration-150 ${
+            type === "sign-up" ? "h-[32rem]" : "h-[22rem]"
           }`}
-          initial={{ opacity: 0, scale: 0 }}
+          initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0 }}
+          exit={{ opacity: 0, scale: 0.95 }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
         >
-          <h1 className="text-center font-semibold mt-4 text-xl">
-            {type == "sign-in" ? "Sign in" : "Sign up"}
+          <h1 className="text-center font-semibold mt-6 text-2xl text-indigo-900 font-[Poppins, sans-serif] tracking-wide">
+            {type === "sign-in" ? "Sign In" : "Sign Up"}
           </h1>
 
           {/* form section */}
           <form
-            className="backdrop-blur-3xl flex gap-6 flex-col items-center"
+            className="flex flex-col gap-8 items-center p-8 rounded-b-xl bg-gradient-to-b from-white to-indigo-50/30 border-t border-indigo-100/50 max-w-md mx-auto "
             onSubmit={handleSubmit}
           >
             {type === "sign-up" && (
-              <div className="w-24 h-24 mt-6 relative cursor-pointer group hover:opacity-80">
+              <div className="w-28 h-28 mt-2 relative cursor-pointer group hover:scale-102 transition-transform duration-200">
                 <img
                   src={
                     formData.profilePicture ||
                     "https://i.pinimg.com/736x/b7/07/8a/b7078a6b41ed574d94b0e73fde7ce08f.jpg"
                   }
-                  className="rounded-full"
+                  className="rounded-full object-cover border-2 border-indigo-200 shadow-sm"
                 />
                 <motion.span
-                  className="absolute z-50 bottom-2 right-3 hidden group-hover:block transition-all"
-                  whileHover={{ scale: 1.2 }}
+                  className="absolute z-50 bottom-0 right-0 bg-indigo-100 p-2 rounded-full shadow-md hidden group-hover:flex items-center justify-center transition-all duration-150"
+                  whileHover={{ scale: 1.1 }}
                 >
                   <FaEdit
-                    className="text-lg"
+                    className="text-lg text-indigo-600"
                     onClick={() => imgRef.current?.click()}
                   />
                   <input
@@ -95,41 +102,52 @@ const AuthDialog = ({
                 </motion.span>
               </div>
             )}
-            <motion.div className="flex items-center gap-1 cursor-pointer mt-2">
-              <h5 className=" font-semibold text-blue-700 text-lg tracking-tighter">
+            <motion.div className="flex items-center gap-2 cursor-pointer">
+              <h5 className="font-medium text-2xl text-indigo-800 font-[Poppins, sans-serif] tracking-tight drop-shadow-sm">
                 Memora
               </h5>
-              <motion.span whileHover={{ rotate: 200, scale: 1.3 }}>
-                <FcStackOfPhotos className="text-3xl" />
+              <motion.span
+                whileHover={{ rotate: 180, scale: 1.2 }}
+                transition={{ duration: 0.4, ease: "easeInOut" }}
+              >
+                <FaBattleNet className="text-3xl text-indigo-600 drop-shadow-sm" />
               </motion.span>
             </motion.div>
-            <div className="flex gap-2 items-center border border-gray-300 px-4 py-2">
-              <FaUserAlt />
-              <input
-                id="username"
-                placeholder="Username"
-                className="border-none focus:outline-0 text-xs"
-                onChange={(e) =>
-                  setFormData({ ...formData, username: e.target.value })
-                }
-              />
-            </div>
-            <div className="flex gap-2 items-center border border-gray-300 px-4 py-2">
-              <RiLockPasswordFill />
-              <input
-                placeholder="Passcode"
-                className="border-none focus:outline-0 text-xs"
-                onChange={(e) =>
-                  setFormData({ ...formData, passcode: e.target.value })
-                }
-              />
+            <div className="w-full flex flex-col gap-4">
+              <div className="flex gap-2 items-center border border-indigo-200/70 px-4 py-3 bg-white rounded-lg shadow-sm focus-within:ring-2 focus-within:ring-indigo-400/50 transition-all duration-200">
+                <FaUserAlt className="text-indigo-500 text-base" />
+                <input
+                  id="username"
+                  placeholder="Username"
+                  className="border-none focus:outline-none text-sm text-gray-800 w-full bg-transparent font-[Poppins, sans-serif]"
+                  onChange={(e) =>
+                    setFormData({ ...formData, username: e.target.value })
+                  }
+                />
+              </div>
+              <div className="flex gap-2 items-center border border-indigo-200/70 px-4 py-3 bg-white rounded-lg shadow-sm focus-within:ring-2 focus-within:ring-indigo-400/50 transition-all duration-200">
+                <RiLockPasswordFill className="text-indigo-500 text-base" />
+                <input
+                  placeholder="Passcode"
+                  className="border-none focus:outline-none text-sm text-gray-800 w-full bg-transparent font-[Poppins, sans-serif]"
+                  onChange={(e) =>
+                    setFormData({ ...formData, passcode: e.target.value })
+                  }
+                />
+              </div>
             </div>
             <button
-              className=" py-2 px-6 flex items-center gap-2 rounded-lg font-semibold text-sm cursor-pointer bg-gray-300 justify-center"
+              className="py-3 px-10 flex items-center gap-2 rounded-lg font-medium text-sm cursor-pointer bg-indigo-600 text-white hover:bg-indigo-700 transition-all duration-200 shadow-md hover:shadow-lg"
               type="submit"
               disabled={loading}
             >
-              {!loading && type === "sign-in" ? "Sign in" : "Sign up"}
+              <motion.span
+                initial={{ opacity: 0, y: -5 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                {!loading && type === "sign-in" ? "Sign In" : "Sign Up"}
+              </motion.span>
               {loading && (
                 <Spinner
                   classNames={{ label: "text-foreground mt-4" }}

@@ -1,4 +1,3 @@
-import { FcStackOfPhotos } from "react-icons/fc";
 import { MdVerified } from "react-icons/md";
 import { useAuthStore } from "../store/auth.store";
 import { useEffect } from "react";
@@ -6,6 +5,7 @@ import { motion } from "motion/react";
 import { NavbarProps } from "../types/types";
 import { Link } from "react-router-dom";
 import { IoLogOut } from "react-icons/io5";
+import { FaBattleNet } from "react-icons/fa";
 
 const Navbar = ({ setIsDialogOpen, setAuthDialogType }: NavbarProps) => {
   const { currUser, fetchUser, signOut } = useAuthStore();
@@ -16,12 +16,15 @@ const Navbar = ({ setIsDialogOpen, setAuthDialogType }: NavbarProps) => {
 
   return (
     <nav className="w-full h-16 border-b border-gray-200 flex items-center justify-between">
-      <motion.div className="flex items-center gap-2 ml-12 cursor-pointer max-sm:ml-4">
-        <Link to={"/"} className=" font-semibold text-blue-700">
+      <motion.div className="flex items-center gap-2 cursor-pointer">
+        <h5 className="font-medium text-xl text-indigo-700 tracking-tight drop-shadow-sm ml-8">
           Memora
-        </Link>
-        <motion.span whileHover={{ rotate: 200, scale: 1.3 }}>
-          <FcStackOfPhotos className="text-xl" />
+        </h5>
+        <motion.span
+          whileHover={{ rotate: 180, scale: 1.2 }}
+          transition={{ duration: 0.4, ease: "easeInOut" }}
+        >
+          <FaBattleNet className="text-3xl text-indigo-600 drop-shadow-sm" />
         </motion.span>
       </motion.div>
 
@@ -29,13 +32,13 @@ const Navbar = ({ setIsDialogOpen, setAuthDialogType }: NavbarProps) => {
         <div className="mr-12 flex items-center gap-2 cursor-pointer max-sm:mr-4">
           <img
             src={currUser.profilePicture}
-            className="rounded-full w-10 h-10"
+            className="rounded-full w-10 h-10 border-indigo-600 border-1"
             alt="user-profile"
             loading="lazy"
           />
           <p className="text-xs flex items-center">
             <span>
-              <MdVerified className="text-blue-500 text-sm" />
+              <MdVerified className="text-indigo-600 text-sm" />
             </span>{" "}
             {currUser.username}
           </p>
