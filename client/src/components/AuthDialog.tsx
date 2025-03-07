@@ -7,7 +7,7 @@ import { RiLockPasswordFill } from "react-icons/ri";
 import { FaEdit } from "react-icons/fa";
 import { ChangeEvent, FormEvent, useRef, useState } from "react";
 import { useAuthStore } from "../store/auth.store";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { Spinner } from "@heroui/spinner";
 
 const AuthDialog = ({
   isDialogOpen,
@@ -52,7 +52,7 @@ const AuthDialog = ({
     <AnimatePresence initial={false}>
       {isDialogOpen ? (
         <motion.div
-          className={`w-[25rem] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  rounded-md shadow transition-all duration-75 ${
+          className={`w-[25rem] rounded-md shadow transition-all duration-75 ${
             type === "sign-up" ? "h-[28rem]" : "h-[20rem]"
           }`}
           initial={{ opacity: 0, scale: 0 }}
@@ -125,13 +125,17 @@ const AuthDialog = ({
               />
             </div>
             <button
-              className="bg-blue-600 py-2 px-6 flex items-center gap-2 rounded-lg font-semibold text-sm cursor-pointer text-white"
+              className=" py-2 px-6 flex items-center gap-2 rounded-lg font-semibold text-sm cursor-pointer bg-gray-300 justify-center"
               type="submit"
               disabled={loading}
             >
-              {type === "sign-in" ? "Sign in" : "Sign up"}
+              {!loading && type === "sign-in" ? "Sign in" : "Sign up"}
               {loading && (
-                <AiOutlineLoading3Quarters className="animate-spin" />
+                <Spinner
+                  classNames={{ label: "text-foreground mt-4" }}
+                  variant="gradient"
+                  size="sm"
+                />
               )}
             </button>
           </form>

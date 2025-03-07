@@ -9,16 +9,18 @@ const Homepage = () => {
   );
 
   return (
-    <div className="w-full min-h-screen relative homepage">
+    <div className="w-full min-h-screen">
       <Navbar
         setIsDialogOpen={setIsDialogOpen}
         setAuthDialogType={setAuthDialogType}
       />
-      <AuthDialog
-        isDialogOpen={isDialogOpen}
-        type={authDialogType}
-        setIsDialogOpen={setIsDialogOpen}
-      />
+      {isDialogOpen && <div className="w-full h-full relative flex justify-center items-center mt-12">
+        <AuthDialog
+          isDialogOpen={isDialogOpen}
+          type={authDialogType}
+          setIsDialogOpen={setIsDialogOpen}
+        />
+      </div>}
     </div>
   );
 };

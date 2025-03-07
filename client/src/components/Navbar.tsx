@@ -5,9 +5,10 @@ import { useEffect } from "react";
 import { motion } from "motion/react";
 import { NavbarProps } from "../types/types";
 import { Link } from "react-router-dom";
+import { IoLogOut } from "react-icons/io5";
 
 const Navbar = ({ setIsDialogOpen, setAuthDialogType }: NavbarProps) => {
-  const { currUser, fetchUser } = useAuthStore();
+  const { currUser, fetchUser, signOut } = useAuthStore();
 
   useEffect(() => {
     fetchUser();
@@ -38,6 +39,13 @@ const Navbar = ({ setIsDialogOpen, setAuthDialogType }: NavbarProps) => {
             </span>{" "}
             {currUser.username}
           </p>
+          <motion.button
+            className="h-full border-l p-2"
+            onClick={signOut}
+            whileHover={{ scale: 1.1 }}
+          >
+            <IoLogOut />
+          </motion.button>
         </div>
       )}
 

@@ -29,10 +29,10 @@ export const useAuthStore = create<AuthStore>((set) => ({
 
       if (data.success == true) {
         set({ currUser: data.user, loading: false });
-        showToast({ message: data.message, type: "success" });
+        // showToast({ message: data.message, type: "success" });
       } else {
         set({ currUser: null, loading: false, error: data.message });
-        showToast({ message: data.message, type: "error" });
+        // showToast({ message: data.message, type: "error" });
       }
       // set({ currUser: data.user });
     } catch (error) {
@@ -99,7 +99,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
       const data: ResponseType = await res.json();
 
       if (data.success) {
-        set({ loading: false });
+        set({ loading: false, currUser: null });
         showToast({ message: data.message, type: "success" });
       } else {
         set({ error: data.message });

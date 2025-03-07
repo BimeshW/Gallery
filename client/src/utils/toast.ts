@@ -5,11 +5,19 @@ import { ToastTypes } from "../types/types";
 
 export const showToast = ({message, type} : ToastTypes) => {
   if(type == "error") {
-    return toast.error(message);
+    return toast.error(message,{
+      style:{
+        fontSize: "11px"
+      }
+    });
   }
 
   if(type == "success") {
-    return toast.success(message);
+    return toast.success(message,{
+      style:{
+        fontSize: "11px"
+      }
+    });
   }
 }
 
