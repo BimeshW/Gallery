@@ -7,13 +7,18 @@ import { RiLockPasswordFill } from "react-icons/ri";
 import { FaEdit } from "react-icons/fa";
 import { ChangeEvent, FormEvent, useRef, useState } from "react";
 import { useAuthStore } from "../store/auth.store";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
-const AuthDialog = ({ isDialogOpen, setIsDialogOpen,type }: AuthDialogTypes) => {
-  const { signIn, signUp, fetchUser } = useAuthStore();
+const AuthDialog = ({
+  isDialogOpen,
+  setIsDialogOpen,
+  type,
+}: AuthDialogTypes) => {
+  const { signIn, signUp, fetchUser, loading } = useAuthStore();
   const [formData, setFormData] = useState({
     username: "",
     passcode: "",
-    image: "",
+    profilePicture: "",
   });
 
   const imgRef = useRef<HTMLInputElement>(null);
@@ -27,7 +32,7 @@ const AuthDialog = ({ isDialogOpen, setIsDialogOpen,type }: AuthDialogTypes) => 
 
     reader.onload = () => {
       const base64 = reader.result as string;
-      setFormData(() => ({ ...formData, image: base64 }));
+      setFormData(() => ({ ...formData, profilePicture: base64 }));
     };
     reader.readAsDataURL(file);
   };
@@ -38,7 +43,6 @@ const AuthDialog = ({ isDialogOpen, setIsDialogOpen,type }: AuthDialogTypes) => 
       await signIn(formData);
       setIsDialogOpen(false);
       await fetchUser();
-
     } else {
       await signUp(formData);
     }
@@ -68,7 +72,7 @@ const AuthDialog = ({ isDialogOpen, setIsDialogOpen,type }: AuthDialogTypes) => 
               <div className="w-24 h-24 mt-6 relative cursor-pointer group hover:opacity-80">
                 <img
                   src={
-                    formData.image ||
+                    formData.profilePicture ||
                     "https://i.pinimg.com/736x/b7/07/8a/b7078a6b41ed574d94b0e73fde7ce08f.jpg"
                   }
                   className="rounded-full"
@@ -121,10 +125,14 @@ const AuthDialog = ({ isDialogOpen, setIsDialogOpen,type }: AuthDialogTypes) => 
               />
             </div>
             <button
-              className="bg-blue-600 py-2 px-6 rounded-full text-sm cursor-pointer text-white"
+              className="bg-blue-600 py-2 px-6 flex items-center gap-2 rounded-lg font-semibold text-sm cursor-pointer text-white"
               type="submit"
+              disabled={loading}
             >
               {type === "sign-in" ? "Sign in" : "Sign up"}
+              {loading && (
+                <AiOutlineLoading3Quarters className="animate-spin" />
+              )}
             </button>
           </form>
         </motion.div>

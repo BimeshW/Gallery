@@ -19,9 +19,10 @@ interface AuthStore {
 
 export const useAuthStore = create<AuthStore>((set) => ({
   currUser: null,
-  loading: true,
+  loading: false,
   error: null,
   fetchUser: async () => {
+    set({ loading: true });
     try {
       const res = await fetch("/api/auth/me");
       const data: ResponseType = await res.json();
@@ -41,6 +42,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
   },
 
   signUp: async (credentials) => {
+    set({ loading: true });
     try {
       const res = await fetch("/api/auth/signup", {
         method: "POST",
@@ -64,6 +66,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
     }
   },
   signIn: async (credentials) => {
+    set({ loading: true });
     try {
       const res = await fetch("/api/auth/signin", {
         method: "POST",
@@ -87,6 +90,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
     }
   },
   signOut: async () => {
+    set({ loading: true });
     try {
       const res = await fetch("/api/auth/signout", {
         method: "POST",

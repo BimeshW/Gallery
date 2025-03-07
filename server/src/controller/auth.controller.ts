@@ -4,6 +4,7 @@ import { generateProfilePic } from "../utils/generateRandomProfilePic";
 import { checkPasscode, hashPassword } from "../utils/hashPassword";
 import { generateTokenAndSetCookie } from "../utils/generateTokenAndSetCookie";
 import { AuthRequest } from "../types/types";
+import { uploadToCloudinary } from "../utils/cloudinary";
 
 interface SignUpRequestBody {
   username: string;
@@ -46,7 +47,9 @@ export const signUp = async (req: Request, res: Response) => {
       return;
     }
 
-    if (!profilePicture) {
+    if (profilePicture) {
+      profilePicture = await uploadToCloudinary(profilePicture);
+    } else {
       profilePicture = generateProfilePic();
     }
 
@@ -151,32 +154,32 @@ export const signOut = async (req: Request, res: Response) => {
   }
 };
 
-export const getCurrentAuthUser = async (req: AuthRequest, res:Response) => {
+export const getCurrentAuthUser = async (req: AuthRequest, res: Response) => {
   try {
     const user = await req.user;
     const userId = user?.user_id;
 
     const currUser = await User.findById(userId);
-    if(!currUser) {
+    if (!currUser) {
       res.status(401).json({
         success: false,
-        message: "Unauthorized"
-      })
-      return
+        message: "Unauthorized",
+      });
+      return;
     }
-    
+
     res.status(200).json({
       success: true,
       message: "User fetch successfully",
-      user:currUser
-    })
+      user: currUser,
+    });
     return;
   } catch (error) {
     console.log("Error getting current user", error);
     res.status(500).json({
       success: false,
       message: "Internal server error",
-      user:null
-    })
+      user: null,
+    });
   }
-}
+};
