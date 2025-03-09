@@ -14,7 +14,6 @@ const Homepage = () => {
   const { currUser } = useAuthStore();
   const { fetchImages, images } = useImageStore();
   console.log(images);
-  
 
   useEffect(() => {
     fetchImages();
@@ -31,7 +30,7 @@ const Homepage = () => {
         type={authDialogType}
         setIsDialogOpen={setIsDialogOpen}
       />
-      <Images images={images}/>
+      {currUser && <Images images={images} />}
       {!currUser && <Introduction setIsDialogOpen={setIsDialogOpen} />}
     </div>
   );

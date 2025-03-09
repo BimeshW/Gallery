@@ -8,6 +8,7 @@ import { FaEdit } from "react-icons/fa";
 import { ChangeEvent, FormEvent, useRef, useState } from "react";
 import { useAuthStore } from "../store/auth.store";
 import { Spinner } from "@heroui/spinner";
+import { useImageStore } from "../store/image.store";
 
 const AuthDialog = ({
   isDialogOpen,
@@ -15,6 +16,7 @@ const AuthDialog = ({
   type,
 }: AuthDialogTypes) => {
   const { signIn, signUp, fetchUser, loading } = useAuthStore();
+  const { fetchImages } = useImageStore();
   const [formData, setFormData] = useState({
     username: "",
     passcode: "",
@@ -41,6 +43,7 @@ const AuthDialog = ({
     e.preventDefault();
     if (type === "sign-in") {
       await signIn(formData);
+      await fetchImages();
       setIsDialogOpen(false);
       await fetchUser();
     } else {
