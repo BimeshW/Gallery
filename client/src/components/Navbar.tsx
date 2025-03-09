@@ -5,17 +5,24 @@ import { motion } from "motion/react";
 import { NavbarProps } from "../types/types";
 import { IoLogOut } from "react-icons/io5";
 import { FaBattleNet } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = ({ setIsDialogOpen, setAuthDialogType }: NavbarProps) => {
   const { currUser, fetchUser, signOut } = useAuthStore();
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchUser();
   }, [fetchUser]);
 
+  const handleSignOut = () => {
+    signOut();
+    navigate("/");
+  };
+
   return (
     <nav className="w-full h-16 border-b border-gray-200 flex items-center justify-between">
-      <motion.div className="flex items-center gap-2 cursor-pointer">
+      <Link to={"/"} className="flex items-center gap-2 cursor-pointer">
         <h5 className="font-medium text-xl text-indigo-700 tracking-tight drop-shadow-sm ml-8">
           Memora
         </h5>
@@ -25,7 +32,7 @@ const Navbar = ({ setIsDialogOpen, setAuthDialogType }: NavbarProps) => {
         >
           <FaBattleNet className="text-3xl text-indigo-600 drop-shadow-sm" />
         </motion.span>
-      </motion.div>
+      </Link>
 
       {currUser && (
         <div className="mr-12 flex items-center gap-2 cursor-pointer max-sm:mr-4">
@@ -43,7 +50,7 @@ const Navbar = ({ setIsDialogOpen, setAuthDialogType }: NavbarProps) => {
           </p>
           <motion.button
             className="h-full border-l p-2"
-            onClick={signOut}
+            onClick={handleSignOut}
             whileHover={{ scale: 1.1 }}
           >
             <IoLogOut />
@@ -58,8 +65,8 @@ const Navbar = ({ setIsDialogOpen, setAuthDialogType }: NavbarProps) => {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={() => {
-              setIsDialogOpen(true);
-              setAuthDialogType("sign-up");
+              setIsDialogOpen!(true);
+              setAuthDialogType!("sign-up");
             }}
           >
             Sign up
@@ -69,8 +76,8 @@ const Navbar = ({ setIsDialogOpen, setAuthDialogType }: NavbarProps) => {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={() => {
-              setIsDialogOpen(true);
-              setAuthDialogType("sign-in");
+              setIsDialogOpen!(true);
+              setAuthDialogType!("sign-in");
             }}
           >
             Sign in

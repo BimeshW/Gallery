@@ -1,6 +1,6 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Document, Schema } from "mongoose";
 
-export interface IImage {
+export interface IImage extends Document {
   user: mongoose.Types.ObjectId;
   cloudinaryUrl: string;
   title?: string;
@@ -22,11 +22,10 @@ const imageSchema = new Schema<IImage>({
   },
   uploadedAt: {
     type: Date,
-    default: Date.now(),
+    default: Date.now,
   },
-  
 });
 
-const Image = mongoose.model("Image", imageSchema);
-
-export default Image;
+// Exporting Model
+const Image = mongoose.model<IImage>("Image", imageSchema);
+export default Image

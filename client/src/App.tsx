@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import Homepage from "./pages/Homepage";
+import Homepage from "./pages/HomePage";
 import { Toaster } from "react-hot-toast";
 
 function App() {
