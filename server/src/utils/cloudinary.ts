@@ -13,6 +13,7 @@ export const uploadToCloudinary = async (imageUrl: string) => {
   try {
     const result = await cloudinary.uploader.upload(imageUrl, {
       folder: "Gallery-mern-project",
+      format:"webp"
     });
 
     return result.secure_url;

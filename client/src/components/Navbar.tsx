@@ -52,6 +52,9 @@ const Navbar = ({ setIsDialogOpen, setAuthDialogType }: NavbarProps) => {
             className="h-full border-l p-2"
             onClick={handleSignOut}
             whileHover={{ scale: 1.1 }}
+            type="button"
+            role="button"
+            aria-label="logout"
           >
             <IoLogOut />
           </motion.button>

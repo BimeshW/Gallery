@@ -11,7 +11,6 @@ const groupByDate = (images: IImage[]) => {
   return images.reduce((acc, img) => {
     const dateKey = formatMongoDate(img.uploadedAt); // Format date like "Oct 27 2025"
     if (!acc[dateKey]) {
-      console.log(acc);
       acc[dateKey] = [];
     }
     acc[dateKey].push(img);
@@ -39,6 +38,8 @@ const Images = ({ images }: Props) => {
                 src={img.cloudinaryUrl}
                 className="hover:opacity-80 cursor-pointer rounded-lg h-52 w-auto"
                 whileHover={{ scale: 1.1 }}
+                alt="optimised"
+                
               />
             ))}
           </div>
