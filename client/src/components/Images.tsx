@@ -1,12 +1,14 @@
+import React, { SetStateAction } from "react";
 import { IImage } from "../types/types";
 import { formatMongoDate } from "../utils/convertDate";
 import { motion } from "framer-motion";
 
 interface Props {
   images: IImage[];
+  setIsPreviewClicked: React.Dispatch<SetStateAction<boolean>>;
+  setCurrentPreviewImage: React.Dispatch<SetStateAction<string>>;
 }
 
-// Helper function to group images by date
 const groupByDate = (images: IImage[]) => {
   return images.reduce((acc, img) => {
     const dateKey = formatMongoDate(img.uploadedAt); // Format date like "Oct 27 2025"
@@ -18,7 +20,11 @@ const groupByDate = (images: IImage[]) => {
   }, {} as Record<string, IImage[]>);
 };
 
-const Images = ({ images }: Props) => {
+const Images = ({
+  images,
+  setIsPreviewClicked,
+  setCurrentPreviewImage,
+}: Props) => {
   const groupedImages = groupByDate(images);
 
   return (
@@ -39,7 +45,10 @@ const Images = ({ images }: Props) => {
                 className="hover:opacity-80 cursor-pointer rounded-lg h-52 w-auto"
                 whileHover={{ scale: 1.1 }}
                 alt="optimised"
-                
+                onClick={() => {
+                  setIsPreviewClicked(true);
+                  setCurrentPreviewImage(img.cloudinaryUrl);
+                }}
               />
             ))}
           </div>
