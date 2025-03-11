@@ -6,8 +6,13 @@ import { NavbarProps } from "../types/types";
 import { IoLogOut } from "react-icons/io5";
 import { FaBattleNet } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
+import { GoPlus } from "react-icons/go";
 
-const Navbar = ({ setIsDialogOpen, setAuthDialogType }: NavbarProps) => {
+const Navbar = ({
+  setIsDialogOpen,
+  setAuthDialogType,
+  setIsUploadPopupOpen,
+}: NavbarProps) => {
   const { currUser, fetchUser, signOut } = useAuthStore();
   const navigate = useNavigate();
 
@@ -36,6 +41,17 @@ const Navbar = ({ setIsDialogOpen, setAuthDialogType }: NavbarProps) => {
 
       {currUser && (
         <div className="mr-12 flex items-center gap-2 cursor-pointer max-sm:mr-4">
+          <motion.button
+            className="font-bold text-4xl mr-4 rounded-full hover:bg-gray-200"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            type="button"
+            role="button"
+            aria-label="Add"
+            onClick={() => setIsUploadPopupOpen(true)}
+          >
+            <GoPlus />
+          </motion.button>
           <img
             src={currUser.profilePicture}
             className="rounded-full w-10 h-10 border-indigo-600 border-1"

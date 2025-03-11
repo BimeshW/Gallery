@@ -50,7 +50,7 @@ const Images = ({
                 onClick={() => {
                   setIsPreviewClicked(true);
                   setCurrentPreviewImage(img.cloudinaryUrl);
-                  setCurrentPrevImageId(img._id)
+                  setCurrentPrevImageId(img._id);
                 }}
               />
             ))}

@@ -41,8 +41,9 @@ export interface AuthDialogTypes {
 }
 
 export interface NavbarProps {
-  setIsDialogOpen?: React.Dispatch<SetStateAction<boolean>>;
-  setAuthDialogType?: React.Dispatch<SetStateAction<"sign-up" | "sign-in">>;
+  setIsDialogOpen: React.Dispatch<SetStateAction<boolean>>;
+  setAuthDialogType: React.Dispatch<SetStateAction<"sign-up" | "sign-in">>;
+  setIsUploadPopupOpen: React.Dispatch<SetStateAction<boolean>>;
 }
 
 export interface IImage {

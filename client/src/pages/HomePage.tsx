@@ -7,6 +7,7 @@ import { useImageStore } from "../store/image.store";
 import { AnimatePresence } from "framer-motion";
 import ImagePreview from "../components/ImagePreview";
 import Images from "../components/Images";
+import UploadModal from "../components/UploadModal";
 
 const Homepage = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -16,10 +17,19 @@ const Homepage = () => {
   const [isPreviewClicked, setIsPreviewClicked] = useState(false);
   const [currentPreviewImage, setCurrentPreviewImage] = useState("");
   const [currentPrevImageId, setCurrentPrevImageId] = useState("");
+  const [isUploadPopupOpen, setIsUploadPopupOpen] = useState(false);
+
   console.log(isPreviewClicked, currentPreviewImage);
+  console.log(isUploadPopupOpen);
   const { currUser } = useAuthStore();
-  const { fetchImages, images } = useImageStore();
+  const { fetchImages, images, uploadImage } = useImageStore();
   console.log(images);
+
+  const handleImageUpload = async (image: string) => {
+    await uploadImage(image);
+    setIsUploadPopupOpen(false);
+    fetchImages();
+  };
 
   useEffect(() => {
     fetchImages();
@@ -30,6 +40,7 @@ const Homepage = () => {
       <Navbar
         setIsDialogOpen={setIsDialogOpen}
         setAuthDialogType={setAuthDialogType}
+        setIsUploadPopupOpen={setIsUploadPopupOpen}
       />
       <AuthDialog
         isDialogOpen={isDialogOpen}
@@ -52,6 +63,15 @@ const Homepage = () => {
             currentPreviewImage={currentPreviewImage}
             setIsPreviewClicked={setIsPreviewClicked}
             currentPrevImageId={currentPrevImageId}
+          />
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence initial={false}>
+        {isUploadPopupOpen && (
+          <UploadModal
+            setIsUploadPopupOpen={setIsUploadPopupOpen}
+            handleImageUpload={handleImageUpload}
           />
         )}
       </AnimatePresence>
