@@ -18,10 +18,15 @@ export interface SignInCredentials {
   passcode: string;
 }
 
-export interface ResponseType {
+export interface UserResponseType {
   success: boolean;
   message: string;
   user: User;
+}
+
+export interface ResponseType {
+  success: boolean,
+  message: string
 }
 
 export interface ToastTypes {
@@ -44,7 +49,6 @@ export interface IImage {
   _id: string;
   user: string;
   cloudinaryUrl: string;
-  title?: string;
   uploadedAt: Date;
 }
 

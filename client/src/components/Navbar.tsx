@@ -21,7 +21,7 @@ const Navbar = ({ setIsDialogOpen, setAuthDialogType }: NavbarProps) => {
   };
 
   return (
-    <nav className="w-full h-16 border-b border-gray-200 flex items-center justify-between">
+    <nav className="w-full h-16 bg-gray-100 flex items-center justify-between">
       <Link to={"/"} className="flex items-center gap-2 cursor-pointer">
         <h5 className="font-medium text-xl text-indigo-700 tracking-tight drop-shadow-sm ml-8">
           Memora

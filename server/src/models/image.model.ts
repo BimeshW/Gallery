@@ -3,7 +3,6 @@ import mongoose, { Document, Schema } from "mongoose";
 export interface IImage extends Document {
   user: mongoose.Types.ObjectId;
   cloudinaryUrl: string;
-  title?: string;
   uploadedAt: Date;
 }
 
@@ -16,9 +15,6 @@ const imageSchema = new Schema<IImage>({
   cloudinaryUrl: {
     type: String,
     required: true,
-  },
-  title: {
-    type: String,
   },
   uploadedAt: {
     type: Date,

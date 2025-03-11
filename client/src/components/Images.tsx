@@ -7,6 +7,7 @@ interface Props {
   images: IImage[];
   setIsPreviewClicked: React.Dispatch<SetStateAction<boolean>>;
   setCurrentPreviewImage: React.Dispatch<SetStateAction<string>>;
+  setCurrentPrevImageId: React.Dispatch<SetStateAction<string>>;
 }
 
 const groupByDate = (images: IImage[]) => {
@@ -24,6 +25,7 @@ const Images = ({
   images,
   setIsPreviewClicked,
   setCurrentPreviewImage,
+  setCurrentPrevImageId,
 }: Props) => {
   const groupedImages = groupByDate(images);
 
@@ -48,6 +50,7 @@ const Images = ({
                 onClick={() => {
                   setIsPreviewClicked(true);
                   setCurrentPreviewImage(img.cloudinaryUrl);
+                  setCurrentPrevImageId(img._id)
                 }}
               />
             ))}

@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { fetchImageTypes, IImage } from "../types/types";
+import { fetchImageTypes, IImage, ResponseType } from "../types/types";
 import { showToast } from "../utils/toast";
 
 interface ImageStore {
@@ -7,7 +7,7 @@ interface ImageStore {
   loading: boolean;
   fetchImages: () => Promise<void>;
   uploadImage: () => Promise<void>;
-  deleteImage: () => Promise<void>;
+  deleteImage: (id: string) => Promise<void>;
 }
 
 export const useImageStore = create<ImageStore>((set) => ({
@@ -33,5 +33,26 @@ export const useImageStore = create<ImageStore>((set) => ({
     }
   },
   uploadImage: () => {},
-  deleteImage: () => {},
+
+  deleteImage: async (id) => {
+    set({ loading: true });
+    try {
+      const res = await fetch(`/api/image/${id}`, {
+        method: "DELETE",
+      });
+
+      const data: ResponseType = await res.json();
+
+      if (data.success === true) {
+        set({ loading: false });
+        showToast({ message: data.message, type: "success" });
+      } else {
+        set({ loading: false });
+        showToast({ message: data.message, type: "error" });
+      }
+    } catch (error) {
+      set({ loading: false });
+      console.log(error);
+    }
+  },
 }));

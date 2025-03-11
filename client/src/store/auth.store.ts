@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import {
-  ResponseType,
+  UserResponseType,
   SignInCredentials,
   SignUpCredentials,
   User,
@@ -25,7 +25,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
     set({ loading: true });
     try {
       const res = await fetch("/api/auth/me");
-      const data: ResponseType = await res.json();
+      const data: UserResponseType = await res.json();
 
       if (data.success == true) {
         set({ currUser: data.user, loading: false });
@@ -51,7 +51,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
         },
         body: JSON.stringify(credentials),
       });
-      const data: ResponseType = await res.json();
+      const data: UserResponseType = await res.json();
 
       if (data.success) {
         set({ loading: false });
@@ -75,7 +75,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
         },
         body: JSON.stringify(credentials),
       });
-      const data: ResponseType = await res.json();
+      const data: UserResponseType = await res.json();
 
       if (data.success) {
         set({ loading: false, currUser: data.user });
@@ -96,7 +96,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
         method: "POST",
       });
 
-      const data: ResponseType = await res.json();
+      const data: UserResponseType = await res.json();
 
       if (data.success) {
         set({ loading: false, currUser: null });

@@ -4,8 +4,9 @@ import AuthDialog from "../components/AuthDialog";
 import Introduction from "../components/Introduction";
 import { useAuthStore } from "../store/auth.store";
 import { useImageStore } from "../store/image.store";
-import Images from "../components/Images";
+import { AnimatePresence } from "framer-motion";
 import ImagePreview from "../components/ImagePreview";
+import Images from "../components/Images";
 
 const Homepage = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -14,6 +15,7 @@ const Homepage = () => {
   );
   const [isPreviewClicked, setIsPreviewClicked] = useState(false);
   const [currentPreviewImage, setCurrentPreviewImage] = useState("");
+  const [currentPrevImageId, setCurrentPrevImageId] = useState("");
   console.log(isPreviewClicked, currentPreviewImage);
   const { currUser } = useAuthStore();
   const { fetchImages, images } = useImageStore();
@@ -39,16 +41,20 @@ const Homepage = () => {
           images={images}
           setCurrentPreviewImage={setCurrentPreviewImage}
           setIsPreviewClicked={setIsPreviewClicked}
+          setCurrentPrevImageId={setCurrentPrevImageId}
         />
       )}
 
-      {isPreviewClicked && currentPreviewImage && (
-        <ImagePreview
-          isPreviewClicked={isPreviewClicked}
-          currentPreviewImage={currentPreviewImage}
-          setIsPreviewClicked={setIsPreviewClicked}
-        />
-      )}
+      <AnimatePresence initial={false}>
+        {isPreviewClicked && currentPreviewImage && (
+          <ImagePreview
+            isPreviewClicked={isPreviewClicked}
+            currentPreviewImage={currentPreviewImage}
+            setIsPreviewClicked={setIsPreviewClicked}
+            currentPrevImageId={currentPrevImageId}
+          />
+        )}
+      </AnimatePresence>
 
       {!currUser && <Introduction setIsDialogOpen={setIsDialogOpen} />}
     </div>

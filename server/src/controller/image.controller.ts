@@ -39,7 +39,6 @@ export const getImages = async (req: AuthRequest, res: Response) => {
 export const uploadImage = async (req: AuthRequest, res: Response) => {
   try {
     const user = await req.user;
-    const { title } = await req.body;
     let { cloudinaryUrl } = await req.body;
 
     if (cloudinaryUrl) {
@@ -56,7 +55,6 @@ export const uploadImage = async (req: AuthRequest, res: Response) => {
     const newImage = new Image({
       user: userId,
       cloudinaryUrl: cloudinaryUrl,
-      title: title,
     });
 
     const uploadedImage: IImage = await newImage.save();
@@ -123,7 +121,7 @@ export const deleteImage = async (req: AuthRequest, res: Response) => {
       return;
     } else {
       const imagePublicId = getPublicIdFromUrl(imageToDelete?.cloudinaryUrl);
-      cloudinary.uploader.destroy(imagePublicId!, {
+      cloudinary.uploader.destroy(`Gallery-mern-project/${imagePublicId}`, {
         invalidate: true,
       });
     }
