@@ -19,11 +19,8 @@ const Homepage = () => {
   const [currentPrevImageId, setCurrentPrevImageId] = useState("");
   const [isUploadPopupOpen, setIsUploadPopupOpen] = useState(false);
 
-  console.log(isPreviewClicked, currentPreviewImage);
-  console.log(isUploadPopupOpen);
   const { currUser } = useAuthStore();
   const { fetchImages, images, uploadImage } = useImageStore();
-  console.log(images);
 
   const handleImageUpload = async (image: string) => {
     await uploadImage(image);
@@ -36,12 +33,14 @@ const Homepage = () => {
   }, [fetchImages]);
 
   return (
-    <div className="w-full min-h-screen overflow-hidden relative">
-      <Navbar
-        setIsDialogOpen={setIsDialogOpen}
-        setAuthDialogType={setAuthDialogType}
-        setIsUploadPopupOpen={setIsUploadPopupOpen}
-      />
+    <div className="w-full min-h-screen overflow-hidden relative bg-black">
+      <div className="mb-12">
+        <Navbar
+          setIsDialogOpen={setIsDialogOpen}
+          setAuthDialogType={setAuthDialogType}
+          setIsUploadPopupOpen={setIsUploadPopupOpen}
+        />
+      </div>
       <AuthDialog
         isDialogOpen={isDialogOpen}
         type={authDialogType}

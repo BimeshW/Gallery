@@ -8,7 +8,7 @@ interface CheckProps {
 export const hashPassword = async (passcode: string) => {
   try {
     const salt = await bcrypt.genSalt(10);
-    const hashedPass =await bcrypt.hash(passcode, salt);
+    const hashedPass = await bcrypt.hash(passcode, salt);
 
     return hashedPass;
   } catch (error) {
@@ -16,9 +16,11 @@ export const hashPassword = async (passcode: string) => {
   }
 };
 
-
-export const checkPasscode = async ({passcode, user_passcode} : CheckProps) => {
+export const checkPasscode = async ({
+  passcode,
+  user_passcode,
+}: CheckProps) => {
   const isCorrect = await bcrypt.compare(passcode, user_passcode);
 
   return isCorrect;
-}
+};

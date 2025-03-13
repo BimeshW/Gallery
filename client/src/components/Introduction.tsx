@@ -8,10 +8,10 @@ const Introduction = ({
   setIsDialogOpen: React.Dispatch<SetStateAction<boolean>>;
 }) => {
   return (
-    <section className="relative min-h-[calc(100vh-4rem)] bg-gradient-to-br from-indigo-50 via-white to-indigo-200/50 flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-[calc(100vh-4rem)] bg-gradient-to-br from-gray-900 via-black to-gray-800 flex items-center justify-center overflow-hidden">
       {/* Background animations */}
       <motion.div
-        className="absolute inset-0 bg-indigo-200/15"
+        className="absolute inset-0 bg-gray-800/20"
         initial={{ opacity: 0, scale: 1.8 }}
         animate={{ opacity: 0.7, scale: 1 }}
         transition={{
@@ -22,7 +22,7 @@ const Introduction = ({
         }}
       />
       <motion.div
-        className="absolute inset-0 bg-indigo-300/10"
+        className="absolute inset-0 bg-gray-700/15"
         initial={{ opacity: 0, rotate: 45 }}
         animate={{ opacity: 0.5, rotate: -45 }}
         transition={{
@@ -37,7 +37,7 @@ const Introduction = ({
       <div className="text-center z-10 max-w-4xl mx-auto px-6">
         {/* Heading with word-by-word animation */}
         <motion.h1
-          className="text-5xl md:text-7xl font-[Poppins, sans-serif] font-extrabold text-indigo-900 tracking-tight mb-8 drop-shadow-md"
+          className="text-5xl md:text-7xl font-[Poppins, sans-serif] font-extrabold text-gray-100 tracking-tight mb-8 drop-shadow-md"
           initial="hidden"
           animate="visible"
           variants={{
@@ -70,7 +70,7 @@ const Introduction = ({
 
         {/* Subheading with character animation */}
         <motion.p
-          className="text-lg md:text-2xl text-gray-800 font-[Poppins, sans-serif] mb-10 leading-relaxed"
+          className="text-lg md:text-2xl text-gray-300 font-[Poppins, sans-serif] mb-10 leading-relaxed"
           initial="hidden"
           animate="visible"
           variants={{
@@ -108,16 +108,16 @@ const Introduction = ({
           transition={{ duration: 0.7, delay: 1.2, ease: "easeOut" }}
         >
           <motion.button
-            className="py-4 px-10 bg-indigo-600 text-white rounded-full font-semibold text-lg shadow-lg hover:bg-indigo-700 transition-all duration-300 cursor-pointer relative overflow-hidden"
+            className="py-4 px-10 bg-gray-200 text-black rounded-full font-semibold text-lg shadow-lg hover:bg-gray-100 transition-all duration-300 cursor-pointer relative overflow-hidden"
             whileHover={{
               scale: 1.1,
-              boxShadow: "0 12px 24px rgba(79, 70, 229, 0.4)",
+              boxShadow: "0 12px 24px rgba(255, 255, 255, 0.2)",
             }}
             whileTap={{ scale: 0.97 }}
             onClick={() => setIsDialogOpen(true)}
           >
             <motion.span
-              className="absolute inset-0 bg-indigo-500/30"
+              className="absolute inset-0 bg-gray-400/30"
               initial={{ scale: 0, x: "-100%" }}
               whileHover={{ scale: 1.5, x: 0 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
@@ -129,14 +129,14 @@ const Introduction = ({
             whileTap={{ scale: 0.9 }}
             transition={{ duration: 0.8, ease: "easeInOut" }}
           >
-            <FaCameraRetro className="text-4xl text-indigo-600 drop-shadow-md" />
+            <FaCameraRetro className="text-4xl text-gray-200 drop-shadow-md" />
           </motion.span>
         </motion.div>
       </div>
 
       {/* Enhanced decorative floating elements */}
       <motion.div
-        className="absolute top-16 left-16 w-20 h-20 bg-indigo-300/25 rounded-full border border-indigo-200/50"
+        className="absolute top-16 left-16 w-20 h-20 bg-gray-700/25 rounded-full border border-gray-600/50"
         animate={{
           y: [0, -30, 0],
           scale: [1, 1.2, 1],
@@ -145,7 +145,7 @@ const Introduction = ({
         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
-        className="absolute bottom-24 right-24 w-16 h-16 bg-indigo-400/25 rounded-full border border-indigo-200/50"
+        className="absolute bottom-24 right-24 w-16 h-16 bg-gray-600/25 rounded-full border border-gray-500/50"
         animate={{
           y: [0, 25, 0],
           scale: [1, 1.15, 1],
@@ -154,7 +154,7 @@ const Introduction = ({
         transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
-        className="absolute top-1/3 right-1/4 w-14 h-14 bg-indigo-500/20 rounded-full"
+        className="absolute top-1/3 right-1/4 w-14 h-14 bg-gray-500/20 rounded-full"
         animate={{
           x: [0, 20, 0],
           y: [0, -15, 0],

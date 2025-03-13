@@ -48,7 +48,7 @@ const ImagePreview = ({
 
   return (
     <motion.div
-      className="fixed inset-0 flex items-center justify-center bg-opacity-50 backdrop-blur-md"
+      className="fixed inset-0 flex items-center justify-center bg-opacity-50 backdrop-blur-md z-50"
       initial={{ opacity: 0, scale: 0 }}
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0 }}
@@ -66,7 +66,7 @@ const ImagePreview = ({
         whileTap={{ scale: 0.7 }}
         onClick={() => setIsDeleteModalOpen(true)}
       >
-        <RiDeleteBin6Line className="text-2xl" />
+        <RiDeleteBin6Line className="text-2xl text-white" />
       </motion.button>
       {/* delete popup modal */}
       <AnimatePresence initial={false}>

@@ -36,7 +36,7 @@ const Images = ({
       {Object.entries(groupedImages).map(([date, imgs]) => (
         <div key={date} className="space-y-4">
           {/* Display Date */}
-          <p className="text-xs font-semibold m-4">{date}</p>
+          <p className="text-xs font-semibold m-4 text-white">{date}</p>
 
           {/* Display Images in a Row */}
           <div className="flex flex-wrap gap-2">

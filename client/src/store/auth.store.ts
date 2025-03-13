@@ -21,6 +21,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
   currUser: null,
   loading: false,
   error: null,
+  
   fetchUser: async () => {
     set({ loading: true });
     try {
@@ -29,15 +30,11 @@ export const useAuthStore = create<AuthStore>((set) => ({
 
       if (data.success == true) {
         set({ currUser: data.user, loading: false });
-        // showToast({ message: data.message, type: "success" });
       } else {
         set({ currUser: null, loading: false, error: data.message });
-        // showToast({ message: data.message, type: "error" });
       }
-      // set({ currUser: data.user });
     } catch (error) {
       set({ currUser: null, loading: false });
-      console.log(error);
     }
   },
 
@@ -62,7 +59,6 @@ export const useAuthStore = create<AuthStore>((set) => ({
       }
     } catch (error) {
       set({ loading: false });
-      console.log(error);
     }
   },
   signIn: async (credentials) => {

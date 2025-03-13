@@ -12,7 +12,7 @@ app.use(express.json({limit: "5mb"}));
 app.use(cookieParser());
 app.use(cors({origin: "http://localhost:3000"}));
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 6000;
 
 app.use("/api/auth", authRoutes);
 app.use("/api/image", imageRoutes)

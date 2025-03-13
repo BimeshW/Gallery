@@ -22,10 +22,8 @@ export const useImageStore = create<ImageStore>((set) => ({
 
       if (data.success === true) {
         set({ images: data.image, loading: false });
-        showToast({ message: data.message, type: "success" });
       } else {
         set({ images: [], loading: false });
-        showToast({ message: data.message, type: "error" });
       }
     } catch (error) {
       set({ images: [], loading: false });
