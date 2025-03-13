@@ -1,33 +1,51 @@
-# 📸 Gallery App
+<div align="center">
+  <h1>📸 Gallery App</h1>
+  <p>A sleek MERN-stack web app to upload, manage, and showcase your photos and memories 📷✨</p>
+  <p><strong>Recommended for PC</strong> | Fully responsive on mobile too!</p>
+</div>
 
-A **MERN stack** project that lets users upload, manage, and view images 📷🔥.
+---
 
 ## 🚀 Features
-- 🖼️ Upload & manage images
-- 📝 User authentication (JWT)
+
+- 🖼️ **Upload & Manage Images**: Easily add and organize your photo collection.
+- 📝 **User Authentication**: Secure login with JWT (JSON Web Tokens).
 
 ## 🛠️ Tech Stack
-- **Frontend:** React, Tailwind CSS, heroUI, Typescript
-- **Backend:** Node.js, Express.js, Typescript
-- **Database:** MongoDB (Atlas)
+
+- **Frontend**: React, Tailwind CSS, HeroUI, TypeScript
+- **Backend**: Node.js, Express.js, TypeScript
+- **Database**: MongoDB (Atlas)
+- **Storage**: Cloudinary for image hosting
 
 ## 🎬 Demo
 
-### Home Screen
-![App Screenshot](https://res.cloudinary.com/dpxnqlpgo/image/upload/v1741836711/fmtctgoicgfpjdbhcllk.png)
+### 🎉 Home Screen
 
-## Image preview
-![App Screenshot](https://res.cloudinary.com/dpxnqlpgo/image/upload/v1741836711/vhpyvuqgugjdvsjuwxbq.png)
+![Home Screen](https://res.cloudinary.com/dpxnqlpgo/image/upload/v1741836711/fmtctgoicgfpjdbhcllk.png)
 
-## Introduction
-![App Screenshot](https://res.cloudinary.com/dpxnqlpgo/image/upload/v1741836711/auaubs7kwn9lawpvxb3z.png)
+### 🖼️ Image Preview
+
+![Image Preview](https://res.cloudinary.com/dpxnqlpgo/image/upload/v1741836711/vhpyvuqgugjdvsjuwxbq.png)
+
+### ℹ️ Introduction
+
+![Introduction](https://res.cloudinary.com/dpxnqlpgo/image/upload/v1741836711/auaubs7kwn9lawpvxb3z.png)
+
+---
 
 ## 🛠️ Installation
-Clone the repo and install dependencies:
+
+Get started in a few simple steps:
+
+**Clone the Repository**:
+
 ```bash
-git clone https://github.com/BimeshW/Gallery.git
-cd Gallery
+ git clone https://github.com/BimeshW/Gallery.git
+ cd Gallery
 ```
+
+````
 
 ## 🔑 Environment Variables
 Create a .env file inside the server directory and add the following plaintext
@@ -39,8 +57,10 @@ CLOUDINARY_CLOUD_NAME=your_cloudinary_name
 CLOUDINARY_API_KEY=your_cloudinary_api_key
 CLOUDINARY_API_SECRET=your_cloudinary_api_secret
 NODE_ENV=development
-```
+````
 
 ## 🚀 Start the Project
+
 ```bash
 npm run dev
+```
